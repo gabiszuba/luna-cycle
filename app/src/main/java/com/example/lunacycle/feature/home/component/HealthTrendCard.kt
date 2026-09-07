@@ -2,7 +2,7 @@ package com.example.lunacycle.feature.home.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.TrendingUp
+import androidx.compose.material.icons.automirrored.rounded.TrendingUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,7 +15,7 @@ import com.example.lunacycle.core.designsystem.theme.*
 fun HealthTrendCard(modifier: Modifier = Modifier) {
     AppCard(modifier.fillMaxWidth().heightIn(min = AppDimensions.trendCard), containerColor = LunaColorRoles.CycleTrend, contentPadding = PaddingValues(AppSpacing.xl)) {
         Box {
-            Icon(Icons.AutoMirrored.Outlined.TrendingUp, null, Modifier.align(Alignment.TopEnd).size(AppDimensions.trendIllustration), tint = MaterialTheme.colorScheme.primary.copy(alpha = AppOpacity.decorative))
+            Icon(Icons.AutoMirrored.Rounded.TrendingUp, null, Modifier.align(Alignment.TopEnd).size(AppDimensions.trendIllustration), tint = MaterialTheme.colorScheme.primary.copy(alpha = AppOpacity.decorative))
             Column {
                 AppBadge("Ciclo Atual", compact = true,
                     containerColor = MaterialTheme.colorScheme.primary.copy(alpha = AppOpacity.decorative),

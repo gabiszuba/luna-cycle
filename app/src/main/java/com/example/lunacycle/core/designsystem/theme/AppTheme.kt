@@ -27,6 +27,13 @@ fun AppTheme(
             val controller = WindowCompat.getInsetsController(window, view)
             controller.isAppearanceLightStatusBars = !darkTheme
             controller.isAppearanceLightNavigationBars = !darkTheme
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                window.isNavigationBarContrastEnforced = false
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                @Suppress("DEPRECATION")
+                window.navigationBarDividerColor = android.graphics.Color.TRANSPARENT
+            }
 
             /*
              * Android 15+ enforces edge-to-edge and ignores statusBarColor.

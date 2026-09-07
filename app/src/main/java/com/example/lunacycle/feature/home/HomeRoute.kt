@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun HomeRoute(viewModel: HomeViewModel) {
+fun HomeRoute(viewModel: HomeViewModel, onOpenCalendar: () -> Unit = {}) {
     val state = viewModel.uiState.collectAsStateWithLifecycle().value
-    HomeScreen(state = state, onAction = viewModel::onAction)
+    HomeScreen(state = state, onAction = { action ->
+        if (action == HomeAction.OpenCalendar) onOpenCalendar() else viewModel.onAction(action)
+    })
 }

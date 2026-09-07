@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Bolt
-import androidx.compose.material.icons.outlined.WaterDrop
+import androidx.compose.material.icons.rounded.Bolt
+import androidx.compose.material.icons.rounded.WaterDrop
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +17,6 @@ import com.example.lunacycle.core.designsystem.theme.AppDimensions
 import com.example.lunacycle.core.designsystem.component.AppIconBadge
 import com.example.lunacycle.core.designsystem.component.AppCard
 import com.example.lunacycle.core.designsystem.theme.AppSpacing
-import com.example.lunacycle.core.designsystem.theme.LunaColorRoles
 
 @Composable
 fun ForecastCard(
@@ -31,10 +30,8 @@ fun ForecastCard(
     AppCard(modifier = modifier.height(AppDimensions.forecastCard), contentPadding = PaddingValues(AppSpacing.md)) {
         Column(verticalArrangement = Arrangement.spacedBy(AppSpacing.xxs)) {
             AppIconBadge(
-                icon = if (isPeriod) Icons.Outlined.WaterDrop else Icons.Outlined.Bolt,
-                accent = accent,
-                containerColor = if (isPeriod) MaterialTheme.colorScheme.primaryContainer else LunaColorRoles.FertilityContainer,
-                circular = true
+                icon = if (isPeriod) Icons.Rounded.WaterDrop else Icons.Rounded.Bolt,
+                accent = accent
             )
             Spacer(Modifier.height(AppSpacing.xxs))
             Text(title, color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.labelMedium)

@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import com.example.lunacycle.core.designsystem.theme.*
 
@@ -18,14 +19,15 @@ fun AppButton(
     modifier: Modifier = Modifier,
     icon: ImageVector? = null,
     style: AppButtonStyle = AppButtonStyle.Filled,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    textStyle: TextStyle = if (style == AppButtonStyle.Filled) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.titleLarge
 ) {
     val content: @Composable RowScope.() -> Unit = {
         if (icon != null) {
             Icon(icon, null, Modifier.size(AppDimensions.Icon.standard))
             Spacer(Modifier.width(AppSpacing.xs))
         }
-        Text(text, style = if (style == AppButtonStyle.Filled) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+        Text(text, style = textStyle, textAlign = TextAlign.Center)
     }
     when (style) {
         AppButtonStyle.Filled -> Button(
@@ -37,7 +39,7 @@ fun AppButton(
         AppButtonStyle.Outlined -> OutlinedButton(
             onClick, modifier.heightIn(min = AppDimensions.outlinedButton), enabled = enabled,
             shape = MaterialTheme.shapes.medium,
-            border = BorderStroke(AppDimensions.border, LunaColorRoles.PinkOutline),
+            border = BorderStroke(AppDimensions.border, LunaColorRoles.PrimaryOutline),
             content = content
         )
     }

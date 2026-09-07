@@ -17,7 +17,7 @@ data class HomeUiState(
 ) {
     companion object {
         fun fake() = HomeUiState(
-            userName = "Jesselyn",
+            userName = "Gabrielle",
             cycleDay = 7,
             phaseName = "Fase de Ovulação",
             phaseStatus = "Alta Fertilidade",

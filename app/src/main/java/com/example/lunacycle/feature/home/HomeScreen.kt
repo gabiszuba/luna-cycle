@@ -4,11 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lunacycle.core.designsystem.component.*
 import com.example.lunacycle.core.designsystem.theme.AppSpacing
@@ -44,7 +45,9 @@ fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Mod
                 text = "Registrar Sintomas",
                 onClick = { onAction(HomeAction.RegisterSymptoms) },
                 modifier = Modifier.fillMaxWidth(),
-                icon = Icons.Outlined.Add
+                icon = Icons.Rounded.Add,
+                style = AppButtonStyle.Outlined,
+                textStyle = MaterialTheme.typography.bodyLarge
             )
         }
         item {
@@ -66,16 +69,6 @@ fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Mod
         items(state.insights.size, key = { state.insights[it].title }) {
             InsightCard(state.insights[it])
             if (it < state.insights.lastIndex) Spacer(Modifier.height(AppSpacing.sm))
-        }
-        item {
-            Spacer(Modifier.height(AppSpacing.xl))
-            AppButton(
-                text = "[ Registrar como estou hoje ]",
-                onClick = { onAction(HomeAction.RegisterWellbeing) },
-                modifier = Modifier.fillMaxWidth(),
-                icon = Icons.Outlined.Add,
-                style = AppButtonStyle.Outlined
-            )
         }
         item {
             Spacer(Modifier.height(AppSpacing.xl))

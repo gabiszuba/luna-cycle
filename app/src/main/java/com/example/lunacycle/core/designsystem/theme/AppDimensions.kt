@@ -25,6 +25,7 @@ object AppDimensions {
 
     object Navigation {
         val itemMinHeight = 44.dp
+        val barHeight = 56.dp
     }
 
     object Cycle {
