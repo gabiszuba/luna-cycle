@@ -36,6 +36,12 @@ data class CalendarUiState(
     } else null
 
     companion object {
+        fun today(date: Calendar = Calendar.getInstance()) = CalendarUiState(
+            year = date.get(Calendar.YEAR),
+            month = date.get(Calendar.MONTH),
+            selectedDay = date.get(Calendar.DAY_OF_MONTH)
+        )
+
         private val monthNames = listOf("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
     }
 }

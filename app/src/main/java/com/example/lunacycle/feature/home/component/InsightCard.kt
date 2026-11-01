@@ -1,23 +1,14 @@
 package com.example.lunacycle.feature.home.component
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import com.example.lunacycle.core.designsystem.theme.AppDimensions
-import com.example.lunacycle.core.designsystem.component.AppIconBadge
-import com.example.lunacycle.core.designsystem.component.AppCard
 import com.example.lunacycle.core.designsystem.theme.AppSpacing
-
 import com.example.lunacycle.feature.home.HomeInsight
 import com.example.lunacycle.feature.home.InsightKind
 
@@ -29,24 +20,22 @@ fun InsightCard(insight: HomeInsight, modifier: Modifier = Modifier) {
         InsightKind.Tip -> LunaIcons.Sparkles
         InsightKind.Mood -> LunaIcons.Smile
     }
-    AppCard(
-        modifier = modifier.fillMaxWidth().heightIn(min = AppDimensions.insightCard),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(AppSpacing.md)
+    Row(
+        modifier.fillMaxWidth().padding(vertical = AppSpacing.sm),
+        horizontalArrangement = Arrangement.spacedBy(AppSpacing.md)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(AppSpacing.md)) {
-            AppIconBadge(
-                icon = icon, accent = MaterialTheme.colorScheme.primary
+        Icon(
+            icon, null,
+            Modifier.padding(top = AppSpacing.xxs).size(AppDimensions.Icon.insight),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(AppSpacing.xxs)) {
+            Text(insight.title, style = MaterialTheme.typography.titleMedium)
+            Text(
+                insight.description,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodyMedium
             )
-            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(AppSpacing.xxs)) {
-                Text(insight.title, style = MaterialTheme.typography.titleMedium)
-                Text(
-                    insight.description,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
-                    minLines = 2
-                )
-            }
-            Icon(LunaIcons.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.outline, modifier = Modifier.size(AppDimensions.Icon.chevron))
         }
     }
 }

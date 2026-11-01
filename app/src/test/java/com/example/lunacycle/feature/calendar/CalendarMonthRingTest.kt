@@ -5,6 +5,27 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class CalendarMonthRingTest {
+    @Test fun todayUsesDeviceDateInsteadOfCalendarSelection() {
+        val date = java.util.GregorianCalendar(2026, Calendar.NOVEMBER, 1)
+        val today = CalendarUiState.today(date)
+        assertEquals(2026, today.year)
+        assertEquals(Calendar.NOVEMBER, today.month)
+        assertEquals(1, today.selectedDay)
+        val browsedMonth = today.moveMonth(-1).copy(selectedDay = 23)
+        assertNotEquals(browsedMonth, CalendarUiState.today(date))
+        assertEquals(today, CalendarUiState.today(date))
+    }
+
+    @Test fun todayTracksMonthAndYearRollover() {
+        val date = java.util.GregorianCalendar(2026, Calendar.DECEMBER, 31)
+        assertEquals(31, CalendarUiState.today(date).selectedDay)
+        date.add(Calendar.DAY_OF_MONTH, 1)
+        val today = CalendarUiState.today(date)
+        assertEquals(2027, today.year)
+        assertEquals(Calendar.JANUARY, today.month)
+        assertEquals(1, today.selectedDay)
+    }
+
     @Test fun everyMonthFillsExactlyOneCircle() {
         listOf(
             CalendarUiState(2025, Calendar.FEBRUARY, 1) to 28,

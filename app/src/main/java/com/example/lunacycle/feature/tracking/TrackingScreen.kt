@@ -125,10 +125,6 @@ fun TrackingScreen(state: TrackingUiState, onAction: (TrackingAction) -> Unit, o
                     modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(16.dp)) {
                     Text("Salvar Registro", style = MaterialTheme.typography.titleMedium)
                 }
-                Spacer(Modifier.height(AppSpacing.md))
-                Text("Registro rápido para acompanhar seu dia.\nDisponível durante esta sessão.",
-                    Modifier.fillMaxWidth(), textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }
@@ -215,17 +211,15 @@ private fun EnergyCard(energy: String?, onChange: (String) -> Unit) {
     Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.padding(AppSpacing.lg)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Text("Energia", Modifier.weight(1f), style = MaterialTheme.typography.titleLarge)
-                Surface(shape = CircleShape, color = MaterialTheme.colorScheme.primaryContainer) {
-                    Text(energy ?: "Como está?", Modifier.padding(horizontal = AppSpacing.xs, vertical = AppSpacing.xxs),
+                Text("Como está sua disposição?", Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+                if (energy != null) Surface(shape = CircleShape, color = MaterialTheme.colorScheme.primaryContainer) {
+                    Text(energy, Modifier.padding(horizontal = AppSpacing.xs, vertical = AppSpacing.xxs),
                         style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
                 }
             }
-            Spacer(Modifier.height(AppSpacing.xs))
-            Text("Como está sua disposição?", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(AppSpacing.lg))
             val gold = MaterialTheme.colorScheme.primary
-            val trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
+            val trackColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
             val thumbColor = MaterialTheme.colorScheme.surface
             Slider(
                 value = energyLevels.indexOf(energy).takeIf { it >= 0 }?.toFloat() ?: 2f,

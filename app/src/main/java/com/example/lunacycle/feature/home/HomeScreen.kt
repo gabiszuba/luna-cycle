@@ -18,7 +18,7 @@ import com.example.lunacycle.core.designsystem.theme.AppTheme
 import com.example.lunacycle.feature.home.component.*
 
 @Composable
-fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Modifier = Modifier, calendar: CalendarUiState = CalendarUiState()) {
+fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Modifier = Modifier, calendar: CalendarUiState = CalendarUiState.today()) {
     LazyColumn(
         modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
         contentPadding = PaddingValues(
@@ -79,10 +79,6 @@ fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Mod
         items(state.dailyTips.size, key = { state.dailyTips[it].title }) {
             InsightCard(state.dailyTips[it])
             if (it < state.dailyTips.lastIndex) Spacer(Modifier.height(AppSpacing.sm))
-        }
-        item {
-            Spacer(Modifier.height(AppSpacing.xl))
-            HealthTrendCard()
         }
     }
 }

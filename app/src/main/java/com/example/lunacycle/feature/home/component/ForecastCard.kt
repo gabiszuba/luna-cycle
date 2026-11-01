@@ -2,6 +2,7 @@ package com.example.lunacycle.feature.home.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,7 +26,7 @@ fun ForecastCard(
     isPeriod: Boolean,
     modifier: Modifier = Modifier
 ) {
-    AppCard(modifier = modifier.height(AppDimensions.forecastCard), contentPadding = PaddingValues(AppSpacing.md)) {
+    AppCard(modifier = modifier.heightIn(min = AppDimensions.forecastCard), contentPadding = PaddingValues(AppSpacing.md)) {
         Column(verticalArrangement = Arrangement.spacedBy(AppSpacing.xxs)) {
             AppIconBadge(
                 icon = if (isPeriod) LunaIcons.Drop else LunaIcons.Leaf,

@@ -102,7 +102,7 @@ fun LunaCycleNavigation() {
             popExitTransition = { ExitTransition.None }
         ) {
             composable<Home> {
-                HomeRoute(viewModel = viewModel<HomeViewModel>(), calendarViewModel = calendarViewModel, onOpenCalendar = ::openCalendar)
+                HomeRoute(viewModel = viewModel<HomeViewModel>(), onOpenTracking = ::openTracking, onOpenCalendar = ::openCalendar)
             }
             composable<Calendar> {
                 CalendarRoute(viewModel = calendarViewModel, onBack = { navController.popBackStack() })

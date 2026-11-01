@@ -11,8 +11,6 @@ object AppDimensions {
     val outlinedButton = 56.dp
     val forecastCard = 168.dp
     val insightCard = 88.dp
-    val trendCard = 152.dp
-    val trendIllustration = 92.dp
 
     object Icon {
         val badge = 14.dp
@@ -25,7 +23,7 @@ object AppDimensions {
 
     object Navigation {
         val itemMinHeight = 44.dp
-        val barHeight = 56.dp
+        val barHeight = 64.dp
     }
 
     object Cycle {

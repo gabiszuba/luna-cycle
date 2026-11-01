@@ -41,9 +41,7 @@ fun DetailsScreen(state: TrackingUiState, onBack: () -> Unit, onEdit: () -> Unit
             }
         }
         item {
-            Text(if (entry == null) "Seu corpo, seu ritmo" else "Um olhar sobre seu dia", style = MaterialTheme.typography.headlineSmall)
-            Spacer(Modifier.height(AppSpacing.xs))
-            Text(if (entry == null) "Registre como você está se sentindo." else "Cada registro conta a sua história.", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodyMedium)
+            Text(if (entry == null) "Registre como você está se sentindo" else "Um olhar sobre seu dia", style = MaterialTheme.typography.headlineSmall)
         }
         item {
             SectionLabel("SEUS REGISTROS")
