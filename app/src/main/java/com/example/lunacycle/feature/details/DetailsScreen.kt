@@ -4,9 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +34,7 @@ fun DetailsScreen(state: TrackingUiState, onBack: () -> Unit, onEdit: () -> Unit
                     Text(state.dateLabel, style = MaterialTheme.typography.titleMedium)
                 }
                 OutlinedButton(onClick = onCalendar, border = BorderStroke(1.dp, MaterialTheme.colorScheme.primaryContainer), contentPadding = PaddingValues(horizontal = 12.dp)) {
-                    Icon(Icons.Rounded.CalendarMonth, null, Modifier.size(16.dp))
+                    Icon(LunaIcons.Calendar, null, Modifier.size(16.dp))
                     Spacer(Modifier.width(AppSpacing.xs))
                     Text("Calendário", style = MaterialTheme.typography.labelMedium)
                 }
@@ -67,7 +66,7 @@ fun DetailsScreen(state: TrackingUiState, onBack: () -> Unit, onEdit: () -> Unit
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1f)) { SectionLabel("SEU DIA") }
                 TextButton(onClick = onEdit) {
-                    Icon(Icons.Rounded.Edit, null, Modifier.size(14.dp))
+                    Icon(LunaIcons.Edit, null, Modifier.size(14.dp))
                     Spacer(Modifier.width(AppSpacing.xxs))
                     Text("Editar")
                 }

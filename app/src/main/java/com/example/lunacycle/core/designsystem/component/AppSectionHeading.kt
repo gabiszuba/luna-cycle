@@ -2,9 +2,8 @@ package com.example.lunacycle.core.designsystem.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.*
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +17,7 @@ fun AppSectionHeading(title: String, modifier: Modifier = Modifier, action: Stri
             Row(Modifier.clickable(onClick = onAction), verticalAlignment = Alignment.CenterVertically) {
                 Text(action, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelLarge)
                 Spacer(Modifier.width(AppSpacing.xxs))
-                Icon(Icons.Rounded.ChevronRight, null, Modifier.size(AppDimensions.Icon.small), tint = MaterialTheme.colorScheme.primary)
+                Icon(LunaIcons.ChevronRight, null, Modifier.size(AppDimensions.Icon.small), tint = MaterialTheme.colorScheme.primary)
             }
         }
     }

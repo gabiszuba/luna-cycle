@@ -4,12 +4,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,7 +24,7 @@ fun AppScreenHeader(
 ) {
     Row(modifier.fillMaxWidth().heightIn(min = 56.dp), verticalAlignment = Alignment.CenterVertically) {
         IconButton(onClick = onBack, modifier = Modifier.offset(x = (-12).dp)) {
-            Icon(Icons.AutoMirrored.Rounded.ArrowBack, "Voltar")
+            Icon(LunaIcons.Back, "Voltar")
         }
         Text(title, style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
         trailing?.invoke()

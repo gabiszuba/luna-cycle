@@ -6,12 +6,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.NotificationsNone
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,9 +30,9 @@ fun HomeHeader(
             Text("Olá, $userName", style = MaterialTheme.typography.headlineMedium)
         }
         IconButton(onClick = onNotificationsClick) {
-            Box {
+            Box(Modifier.size(AppDimensions.Icon.navigation), contentAlignment = Alignment.Center) {
                 Icon(
-                    imageVector = Icons.Rounded.NotificationsNone,
+                    imageVector = LunaIcons.Bell,
                     contentDescription = "Notificações",
                     modifier = Modifier.size(
                         AppDimensions.Icon.navigation

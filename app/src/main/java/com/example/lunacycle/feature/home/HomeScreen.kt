@@ -3,9 +3,9 @@ package com.example.lunacycle.feature.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
+import com.example.lunacycle.feature.calendar.CalendarUiState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.MaterialTheme
@@ -14,11 +14,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.lunacycle.core.designsystem.component.*
 import com.example.lunacycle.core.designsystem.theme.AppSpacing
 import com.example.lunacycle.core.designsystem.theme.AppTheme
-import com.example.lunacycle.core.designsystem.theme.LunaColorRoles
+
 import com.example.lunacycle.feature.home.component.*
 
 @Composable
-fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Modifier = Modifier) {
+fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Modifier = Modifier, calendar: CalendarUiState = CalendarUiState()) {
     LazyColumn(
         modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
         contentPadding = PaddingValues(
@@ -37,7 +37,7 @@ fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Mod
                 Modifier.fillMaxWidth().padding(top = AppSpacing.xxxl, bottom = AppSpacing.hero),
                 contentAlignment = Alignment.Center
             ) {
-                CycleOverviewCard(state.cycleDay, state.phaseName, state.phaseStatus)
+                CycleOverviewCard(calendar, onOpenCalendar = { onAction(HomeAction.OpenCalendar) })
             }
         }
         item {
@@ -45,8 +45,9 @@ fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Mod
                 text = "Registrar Sintomas",
                 onClick = { onAction(HomeAction.RegisterSymptoms) },
                 modifier = Modifier.fillMaxWidth(),
-                icon = Icons.Rounded.Add,
+                icon = LunaIcons.Add,
                 style = AppButtonStyle.Outlined,
+                borderColor = MaterialTheme.colorScheme.outline,
                 textStyle = MaterialTheme.typography.bodyLarge
             )
         }
@@ -58,7 +59,7 @@ fun HomeScreen(state: HomeUiState, onAction: (HomeAction) -> Unit, modifier: Mod
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(AppSpacing.md)) {
                 ForecastCard("PRÓXIMA\nMENSTRUAÇÃO", "Em ${state.daysUntilPeriod} dias", state.nextPeriodDate, MaterialTheme.colorScheme.primary, true, Modifier.weight(1f))
-                ForecastCard("FÉRTIL", state.fertileLevel, state.fertileDates, LunaColorRoles.Fertility, false, Modifier.weight(1f))
+                ForecastCard("FÉRTIL", state.fertileLevel, state.fertileDates, MaterialTheme.colorScheme.primary, false, Modifier.weight(1f))
             }
         }
         item {

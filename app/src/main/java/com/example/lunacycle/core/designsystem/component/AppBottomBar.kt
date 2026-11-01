@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
@@ -46,10 +48,16 @@ fun AppBottomBar(items: List<AppNavigationItem>, selectedKey: String, onItemSele
                         .indication(interactionSource, ripple())
                 )
                 Column(
+                    modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(AppSpacing.hairline, Alignment.CenterVertically)
                 ) {
-                    Icon(item.icon, null, Modifier.size(AppDimensions.Icon.navigation), tint = color)
+                    Box(
+                        Modifier.fillMaxWidth().height(AppDimensions.Icon.navigation),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(item.icon, null, Modifier.size(AppDimensions.Icon.navigation), tint = color)
+                    }
                     Text(item.label, color = color, style = MaterialTheme.typography.labelSmall, textAlign = TextAlign.Center)
                 }
             }

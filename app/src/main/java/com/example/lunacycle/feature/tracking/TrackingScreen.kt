@@ -1,6 +1,8 @@
-﻿package com.example.lunacycle.feature.tracking
+package com.example.lunacycle.feature.tracking
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,16 +10,16 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,18 +33,18 @@ import kotlin.math.roundToInt
 
 private data class TrackingOption(val label: String, val icon: ImageVector)
 private val symptomOptions = listOf(
-    TrackingOption("Cólicas", Icons.Rounded.MonitorHeart),
-    TrackingOption("Dor de cabeça", Icons.Rounded.Bolt),
-    TrackingOption("Inchaço", Icons.Rounded.Waves),
-    TrackingOption("Cansaço", Icons.Rounded.DarkMode),
-    TrackingOption("Calores", Icons.Rounded.DeviceThermostat),
-    TrackingOption("Outro", Icons.Rounded.Add)
+    TrackingOption("Cólicas", LunaIcons.Pulse),
+    TrackingOption("Dor de cabeça", LunaIcons.Pulse),
+    TrackingOption("Inchaço", LunaIcons.Waves),
+    TrackingOption("Cansaço", LunaIcons.Moon),
+    TrackingOption("Calores", LunaIcons.Sun),
+    TrackingOption("Outro", LunaIcons.Add)
 )
 private val moodOptions = listOf(
-    TrackingOption("Feliz", Icons.Rounded.SentimentSatisfiedAlt),
-    TrackingOption("Sensível", Icons.Rounded.FavoriteBorder),
-    TrackingOption("Estressada", Icons.Rounded.Air),
-    TrackingOption("Exausta", Icons.Rounded.Coffee)
+    TrackingOption("Feliz", LunaIcons.Smile),
+    TrackingOption("Sensível", LunaIcons.Heart),
+    TrackingOption("Estressada", LunaIcons.Wind),
+    TrackingOption("Exausta", LunaIcons.Cup)
 )
 private val energyLevels = listOf("Esgotada", "Baixa", "Média", "Alta", "Radiante")
 
@@ -60,11 +62,7 @@ fun TrackingScreen(state: TrackingUiState, onAction: (TrackingAction) -> Unit, o
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text("Fluxo", Modifier.weight(1f), style = MaterialTheme.typography.titleLarge)
-                    Surface(shape = CircleShape, color = MaterialTheme.colorScheme.background,
-                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline)) {
-                        Text("Obrigatório", Modifier.padding(horizontal = AppSpacing.xs, vertical = AppSpacing.hairline),
-                            style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
+
                 }
                 Spacer(Modifier.height(AppSpacing.lg))
                 Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min).selectableGroup(), horizontalArrangement = Arrangement.spacedBy(AppSpacing.sm)) {
@@ -84,7 +82,6 @@ fun TrackingScreen(state: TrackingUiState, onAction: (TrackingAction) -> Unit, o
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text("Sintomas", Modifier.weight(1f), style = MaterialTheme.typography.titleLarge)
-                    Text("Mais usados", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                 }
                 Spacer(Modifier.height(AppSpacing.lg))
                 Column(verticalArrangement = Arrangement.spacedBy(AppSpacing.sm)) {
@@ -101,8 +98,6 @@ fun TrackingScreen(state: TrackingUiState, onAction: (TrackingAction) -> Unit, o
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text("Humor", Modifier.weight(1f), style = MaterialTheme.typography.titleLarge)
-                    Text(if (state.entry.mood == null) "0 selecionados" else "1 selecionado",
-                        style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Spacer(Modifier.height(AppSpacing.lg))
                 Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min).selectableGroup(), horizontalArrangement = Arrangement.spacedBy(AppSpacing.sm)) {
@@ -120,7 +115,7 @@ fun TrackingScreen(state: TrackingUiState, onAction: (TrackingAction) -> Unit, o
                         label = { Text("Anotação opcional") }, minLines = 2, maxLines = 4, shape = MaterialTheme.shapes.medium)
                 } else {
                     TextButton(onClick = { showNotes = true }, contentPadding = PaddingValues(0.dp)) {
-                        Icon(Icons.Rounded.Add, null, Modifier.size(16.dp))
+                        Icon(LunaIcons.Add, null, Modifier.size(16.dp))
                         Spacer(Modifier.width(AppSpacing.xs))
                         Text("Adicionar anotação", style = MaterialTheme.typography.labelMedium)
                     }
@@ -143,19 +138,19 @@ fun TrackingScreen(state: TrackingUiState, onAction: (TrackingAction) -> Unit, o
 private fun QuickEntryHeader(state: TrackingUiState, onAction: (TrackingAction) -> Unit, onBack: () -> Unit) {
     Box(Modifier.fillMaxWidth().padding(horizontal = AppSpacing.md, vertical = AppSpacing.sm)) {
         IconButton(onClick = onBack, modifier = Modifier.align(Alignment.CenterStart)) {
-            Icon(Icons.Rounded.Close, "Fechar registro")
+            Icon(LunaIcons.Close, "Fechar registro")
         }
         Column(Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
             Text("REGISTRO RÁPIDO", style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 1.sp),
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = { onAction(TrackingAction.ChangeDay(-1)) }) {
-                    Icon(Icons.Rounded.ChevronLeft, "Dia anterior", Modifier.size(20.dp), tint = MaterialTheme.colorScheme.primary)
+                    Icon(LunaIcons.ChevronLeft, "Dia anterior", Modifier.size(20.dp), tint = MaterialTheme.colorScheme.primary)
                 }
                 val date = SimpleDateFormat("d MMM", Locale.forLanguageTag("pt-BR")).format(state.date).replace(".", "")
                 Text(if (state.isToday) "Hoje, $date" else date, style = MaterialTheme.typography.titleLarge)
                 IconButton(enabled = !state.isToday, onClick = { onAction(TrackingAction.ChangeDay(1)) }) {
-                    Icon(Icons.Rounded.ChevronRight, "Próximo dia", Modifier.size(20.dp))
+                    Icon(LunaIcons.ChevronRight, "Próximo dia", Modifier.size(20.dp))
                 }
             }
         }
@@ -209,11 +204,12 @@ private fun FlowIntensityIcon(drops: Int) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(drops) {
-            Icon(Icons.Rounded.WaterDrop, null, Modifier.size(if (drops == 1) 22.dp else 16.dp))
+            Icon(LunaIcons.Drop, null, Modifier.size(if (drops == 1) 22.dp else 16.dp))
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EnergyCard(energy: String?, onChange: (String) -> Unit) {
     Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surface) {
@@ -228,9 +224,49 @@ private fun EnergyCard(energy: String?, onChange: (String) -> Unit) {
             Spacer(Modifier.height(AppSpacing.xs))
             Text("Como está sua disposição?", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(AppSpacing.lg))
-            Slider(value = energyLevels.indexOf(energy).takeIf { it >= 0 }?.toFloat() ?: 2f,
-                onValueChange = { onChange(energyLevels[it.roundToInt()]) }, valueRange = 0f..4f, steps = 3,
-                modifier = Modifier.fillMaxWidth())
+            val gold = MaterialTheme.colorScheme.primary
+            val trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
+            val thumbColor = MaterialTheme.colorScheme.surface
+            Slider(
+                value = energyLevels.indexOf(energy).takeIf { it >= 0 }?.toFloat() ?: 2f,
+                onValueChange = { onChange(energyLevels[it.roundToInt().coerceIn(0, 4)]) },
+                valueRange = 0f..4f,
+                steps = 3,
+                modifier = Modifier.fillMaxWidth(),
+                thumb = {
+                    Box(
+                        Modifier.size(24.dp)
+                            .background(gold.copy(alpha = 0.12f), CircleShape)
+                            .padding(3.dp)
+                            .background(thumbColor, CircleShape)
+                            .border(1.5.dp, gold, CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Box(Modifier.size(6.dp).background(gold, CircleShape))
+                    }
+                },
+                track = { slider ->
+                    Canvas(Modifier.fillMaxWidth().height(24.dp)) {
+                        val centerY = size.height / 2
+                        val progress = (slider.value / 4f).coerceIn(0f, 1f)
+                        val rtl = layoutDirection == androidx.compose.ui.unit.LayoutDirection.Rtl
+                        fun position(fraction: Float) = Offset(
+                            size.width * if (rtl) 1f - fraction else fraction, centerY
+                        )
+                        drawLine(trackColor, position(0f), position(1f), 4.dp.toPx(), StrokeCap.Round)
+                        if (progress > 0f) {
+                            drawLine(gold, position(0f), position(progress), 4.dp.toPx(), StrokeCap.Round)
+                        }
+                        repeat(5) { step ->
+                            val fraction = step / 4f
+                            drawCircle(
+                                if (fraction <= progress) gold else trackColor,
+                                3.dp.toPx(), position(fraction)
+                            )
+                        }
+                    }
+                }
+            )
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text("ESGOTADA", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("ENERGIZADA", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)

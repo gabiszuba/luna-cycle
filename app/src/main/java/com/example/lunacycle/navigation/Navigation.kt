@@ -1,11 +1,7 @@
 
 package com.example.lunacycle.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.MenuBook
-import androidx.compose.material.icons.rounded.AddCircleOutline
-import androidx.compose.material.icons.rounded.CalendarMonth
-import androidx.compose.material.icons.rounded.Home
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -45,6 +41,7 @@ fun LunaCycleNavigation() {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val trackingViewModel: TrackingViewModel = viewModel()
+    val calendarViewModel: CalendarViewModel = viewModel()
     val selectedKey = when {
         backStackEntry?.destination?.hasRoute<Calendar>() == true -> "calendar"
         backStackEntry?.destination?.hasRoute<Tracking>() == true -> "register"
@@ -105,10 +102,10 @@ fun LunaCycleNavigation() {
             popExitTransition = { ExitTransition.None }
         ) {
             composable<Home> {
-                HomeRoute(viewModel = viewModel<HomeViewModel>(), onOpenCalendar = ::openCalendar)
+                HomeRoute(viewModel = viewModel<HomeViewModel>(), calendarViewModel = calendarViewModel, onOpenCalendar = ::openCalendar)
             }
             composable<Calendar> {
-                CalendarRoute(viewModel = viewModel<CalendarViewModel>(), onBack = { navController.popBackStack() })
+                CalendarRoute(viewModel = calendarViewModel, onBack = { navController.popBackStack() })
             }
             composable<Tracking> {
                 TrackingRoute(trackingViewModel, onBack = { navController.popBackStack() }, onSaved = ::openDetails)
@@ -121,8 +118,8 @@ fun LunaCycleNavigation() {
 }
 
 private val homeNavigationItems = listOf(
-    AppNavigationItem("home", "Início", Icons.Rounded.Home),
-    AppNavigationItem("calendar", "Calendário", Icons.Rounded.CalendarMonth),
-    AppNavigationItem("details", "Detalhes", Icons.AutoMirrored.Rounded.MenuBook),
-    AppNavigationItem("register", "Registrar", Icons.Rounded.AddCircleOutline)
+    AppNavigationItem("home", "Início", LunaIcons.Home),
+    AppNavigationItem("calendar", "Calendário", LunaIcons.Calendar),
+    AppNavigationItem("details", "Detalhes", LunaIcons.Journal),
+    AppNavigationItem("register", "Registrar", LunaIcons.AddCircle)
 )

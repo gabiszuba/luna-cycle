@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Bolt
-import androidx.compose.material.icons.rounded.WaterDrop
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +28,7 @@ fun ForecastCard(
     AppCard(modifier = modifier.height(AppDimensions.forecastCard), contentPadding = PaddingValues(AppSpacing.md)) {
         Column(verticalArrangement = Arrangement.spacedBy(AppSpacing.xxs)) {
             AppIconBadge(
-                icon = if (isPeriod) Icons.Rounded.WaterDrop else Icons.Rounded.Bolt,
+                icon = if (isPeriod) LunaIcons.Drop else LunaIcons.Leaf,
                 accent = accent
             )
             Spacer(Modifier.height(AppSpacing.xxs))

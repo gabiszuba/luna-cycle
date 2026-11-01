@@ -3,10 +3,8 @@ package com.example.lunacycle.feature.calendar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.FavoriteBorder
-import androidx.compose.material.icons.rounded.WaterDrop
 import androidx.compose.material3.*
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,8 +43,8 @@ fun CalendarScreen(state: CalendarUiState, onAction: (CalendarAction) -> Unit, o
             AppSectionHeading("Insights do seu ciclo")
             Spacer(Modifier.height(AppSpacing.md))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(AppSpacing.md)) {
-                InsightCard("Duração média", "28 dias", Icons.Rounded.FavoriteBorder, MaterialTheme.colorScheme.primary, Modifier.weight(1f))
-                InsightCard("Fluxo típico", "Moderado", Icons.Rounded.WaterDrop, LunaColorRoles.Fertility, Modifier.weight(1f))
+                InsightCard("Duração média", "28 dias", LunaIcons.Heart, MaterialTheme.colorScheme.primary, Modifier.weight(1f))
+                InsightCard("Fluxo típico", "Moderado", LunaIcons.Drop, LunaColorRoles.Fertility, Modifier.weight(1f))
             }
         }
     }

@@ -13,6 +13,12 @@ data class CalendarUiState(
     val firstDayOffset get() = firstDay.get(Calendar.DAY_OF_WEEK) - Calendar.SUNDAY
     val monthName get() = monthNames[month]
 
+    /** Each day occupies one equal slice, including days without phase data. */
+    val daySweepAngle: Float get() = 360f / daysInMonth
+    val selectedDayAngle: Float? get() = selectedDay
+        ?.takeIf { it in 1..daysInMonth }
+        ?.let { -90f + (it - 0.5f) * daySweepAngle }
+
     fun moveMonth(amount: Int): CalendarUiState {
         val date = firstDay.apply { add(Calendar.MONTH, amount) }
         return copy(year = date.get(Calendar.YEAR), month = date.get(Calendar.MONTH), selectedDay = null)

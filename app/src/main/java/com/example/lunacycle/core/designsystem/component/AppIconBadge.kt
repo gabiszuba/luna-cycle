@@ -1,8 +1,11 @@
 package com.example.lunacycle.core.designsystem.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -15,8 +18,8 @@ import com.example.lunacycle.core.designsystem.theme.AppDimensions
 
 @Composable
 fun AppIconBadge(icon: ImageVector, accent: Color, modifier: Modifier = Modifier) {
-    val containerColor = accent.copy(alpha = .18f).compositeOver(MaterialTheme.colorScheme.surface)
-    Box(modifier.size(AppDimensions.iconBadge).background(containerColor, MaterialTheme.shapes.extraSmall), contentAlignment = Alignment.Center) {
+    val containerColor = accent.copy(alpha = .07f).compositeOver(MaterialTheme.colorScheme.surface)
+    Box(modifier.requiredSize(AppDimensions.iconBadge).background(containerColor, CircleShape).border(AppDimensions.border, accent.copy(alpha = .16f), CircleShape), contentAlignment = Alignment.Center) {
         Icon(icon, null, Modifier.size(AppDimensions.Icon.insight), tint = accent)
     }
 }

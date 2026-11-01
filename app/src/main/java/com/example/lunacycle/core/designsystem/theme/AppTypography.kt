@@ -15,13 +15,6 @@ private val Poppins = FontFamily(
     Font(R.font.poppins_bold, FontWeight.Bold)
 )
 
-private val Inter = FontFamily(
-    Font(R.font.inter_regular, FontWeight.Normal),
-    Font(R.font.inter_medium, FontWeight.Medium),
-    Font(R.font.inter_semibold, FontWeight.SemiBold),
-    Font(R.font.inter_bold, FontWeight.Bold)
-)
-
 private val BaseTypography = Typography(
     displayLarge = TextStyle(fontFamily = FontFamily.Default, fontWeight = FontWeight.Bold, fontSize = 60.sp, lineHeight = 66.sp, letterSpacing = (-2).sp),
     headlineLarge = TextStyle(fontFamily = FontFamily.Default, fontWeight = FontWeight.Bold, fontSize = 32.sp, lineHeight = 38.sp),
@@ -45,12 +38,12 @@ val LunaTypography = BaseTypography.copy(
     titleLarge = BaseTypography.titleLarge.copy(fontFamily = Poppins),
     titleMedium = BaseTypography.titleMedium.copy(fontFamily = Poppins),
     titleSmall = BaseTypography.titleSmall.copy(fontFamily = Poppins),
-    bodyLarge = BaseTypography.bodyLarge.copy(fontFamily = Inter),
-    bodyMedium = BaseTypography.bodyMedium.copy(fontFamily = Inter),
-    bodySmall = BaseTypography.bodySmall.copy(fontFamily = Inter),
-    labelLarge = BaseTypography.labelLarge.copy(fontFamily = Inter),
-    labelMedium = BaseTypography.labelMedium.copy(fontFamily = Inter),
-    labelSmall = BaseTypography.labelSmall.copy(fontFamily = Inter)
+    bodyLarge = BaseTypography.bodyLarge.copy(fontFamily = Poppins),
+    bodyMedium = BaseTypography.bodyMedium.copy(fontFamily = Poppins),
+    bodySmall = BaseTypography.bodySmall.copy(fontFamily = Poppins),
+    labelLarge = BaseTypography.labelLarge.copy(fontFamily = Poppins),
+    labelMedium = BaseTypography.labelMedium.copy(fontFamily = Poppins),
+    labelSmall = BaseTypography.labelSmall.copy(fontFamily = Poppins)
 )
 
 val LunaCycleDayLabel = LunaTypography.labelLarge.copy(letterSpacing = 1.sp)

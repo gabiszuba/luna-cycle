@@ -9,11 +9,8 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CalendarMonth
-import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
-import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material3.*
+import com.example.lunacycle.core.designsystem.component.LunaIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -51,14 +48,14 @@ internal fun CalendarPhase.accent(): Color = when (this) {
 fun MonthCalendar(state: CalendarUiState, onAction: (CalendarAction) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(AppSpacing.md)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Rounded.CalendarMonth, null, tint = MaterialTheme.colorScheme.primary)
+            Icon(LunaIcons.Calendar, null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(AppSpacing.xs))
             Text("${state.monthName} ${state.year}", style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
             IconButton(onClick = { onAction(CalendarAction.PreviousMonth) }) {
-                Icon(Icons.AutoMirrored.Rounded.KeyboardArrowLeft, "Mês anterior")
+                Icon(LunaIcons.ChevronLeft, "Mês anterior")
             }
             IconButton(onClick = { onAction(CalendarAction.NextMonth) }) {
-                Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, "Próximo mês")
+                Icon(LunaIcons.ChevronRight, "Próximo mês")
             }
         }
         CalendarGlassPanel(selectedDay = state.selectedDay, firstDayOffset = state.firstDayOffset) {

@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
@@ -20,14 +21,20 @@ fun AppButton(
     icon: ImageVector? = null,
     style: AppButtonStyle = AppButtonStyle.Filled,
     enabled: Boolean = true,
+    borderColor: androidx.compose.ui.graphics.Color = LunaColorRoles.PrimaryOutline,
     textStyle: TextStyle = if (style == AppButtonStyle.Filled) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.titleLarge
 ) {
     val content: @Composable RowScope.() -> Unit = {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(AppSpacing.xs, Alignment.CenterHorizontally)
+        ) {
         if (icon != null) {
             Icon(icon, null, Modifier.size(AppDimensions.Icon.standard))
-            Spacer(Modifier.width(AppSpacing.xs))
+
         }
         Text(text, style = textStyle, textAlign = TextAlign.Center)
+        }
     }
     when (style) {
         AppButtonStyle.Filled -> Button(
@@ -39,7 +46,7 @@ fun AppButton(
         AppButtonStyle.Outlined -> OutlinedButton(
             onClick, modifier.heightIn(min = AppDimensions.outlinedButton), enabled = enabled,
             shape = MaterialTheme.shapes.medium,
-            border = BorderStroke(AppDimensions.border, LunaColorRoles.PrimaryOutline),
+            border = BorderStroke(AppDimensions.border, borderColor),
             content = content
         )
     }
